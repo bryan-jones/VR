@@ -228,7 +228,7 @@ function update(dt) {
  * Render the scene.
  */
 function render(dt) {
-  rotationPoint.rotation.y += 0.01;
+  rotationPoint.rotation.y += 0.0025;
   effect.render(scene, camera);
 }
 
