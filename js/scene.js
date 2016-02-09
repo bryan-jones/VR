@@ -4,6 +4,17 @@
  */
 
 /**
+ * @file
+ * The main scene.
+ */
+
+/**
+ * Define constants.
+ */
+const IMAGE_PATH = './images/';
+const TEXTURE_PATH = './images/textures/';
+
+/**
  * Create the animation request.
  */
 if (!window.requestAnimationFrame) {
@@ -28,38 +39,39 @@ var camera,
     effect,
     controls,
     element,
-    container,
-    rotationPoint;
+    container;
 var light2,
     light3,
     light4;
-var clock = new THREE.Clock();
+
+init();
+animate();
 
 /**
  * Initializer function.
  */
 function init() {
-
   // Build the container
-  container = document.getElementById('container');
+  container = document.createElement( 'div' );
+  document.body.appendChild( container );
 
   // Create the scene.
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x000000, 0.003 );
+  scene.fog = new THREE.FogExp2( 0x000000, 0.0003 );
+
+  // Create the camera.
+  camera = new THREE.PerspectiveCamera(
+   60, // Angle
+    window.innerWidth / window.innerHeight, // Aspect Ratio.
+    1, // Near view.
+    10000 // Far view.
+  );
+  camera.position.z = 50;
+  scene.add(camera);
 
   // Create the point of rotation for the lights.
   rotationPoint = new THREE.Object3D();
   scene.add( rotationPoint );
-
-  // Create the camera.
-  camera = new THREE.PerspectiveCamera(
-    45, // Angle
-    window.innerWidth / window.innerHeight, // Aspect Ratio.
-    1, // Near view.
-    700 // Far view.
-  );
-  camera.position.set(-50, 170, 200);
-  rotationPoint.add(camera);
 
   // Build the renderer.
   renderer = new THREE.WebGLRenderer();
@@ -69,14 +81,11 @@ function init() {
 
   // Add the VR screen effect.
   effect = new THREE.StereoEffect(renderer);
+  effect.eyeSeparation = 10;
+  effect.setSize( window.innerWidth, window.innerHeight );
 
   // Build the controls.
   controls = new THREE.OrbitControls(camera, element);
-  /*controls.target.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z
-  );*/
   controls.enablePan = false;
   controls.enableZoom = false;
 
@@ -85,35 +94,106 @@ function init() {
      return;
     }
 
-    controls = new THREE.DeviceOrientationControls(camera, true);
+    controls = new THREE.DeviceOrientationControls(camera);
     controls.connect();
-    controls.update();
-
-    element.addEventListener('click', fullscreen, false);
 
     window.removeEventListener('deviceorientation', setOrientationControls, true);
   }
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
-  // Create a sphere.
-  var filePath = './images/textures/brick/brick.jpg';
-  var loader = new THREE.TextureLoader();
-  loader.load( filePath, function( texture ) {
+  // Lights
+  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  scene.add(light);
+
+  var light2 = new THREE.PointLight( 0xffffff, 2, 6000, 1);
+  light2.position.set( 0, 3000, 1500 );
+  rotationPoint.add( light2 );
+
+
+  var spotLight = new THREE.SpotLight( 0xffffff, 1);
+  spotLight.position.set( -1200, -1480, -1450 );
+
+  spotLight.castShadow = true;
+
+  spotLight.shadowMapWidth = 1024;
+  spotLight.shadowMapHeight = 1024;
+
+  spotLight.shadowCameraNear = 500;
+  spotLight.shadowCameraFar = 4000;
+  spotLight.shadowCameraFov = 30;
+
+  scene.add( spotLight );
+
+  // Create a floor texture.
+  createWall('front', 'wood');
+  createWall('back', 'wood');
+  createWall('bottom', 'brick');
+  createWall('left', 'wood');
+  createWall('right', 'wood');
+
+  // Add a box.
+  createBox();
+
+  window.addEventListener('resize', onWindowResize, false);
+}
+
+/**
+ * Events to fire upon window resizing.
+ */
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  effect.setSize(window.innerWidth, window.innerHeight);
+}
+
+/**
+ * Updates to apply to the scene while running.
+ */
+function update() {
+  camera.updateProjectionMatrix();
+  controls.update();
+  rotationPoint.rotation.y += 0.005;
+}
+
+/**
+ * Render the scene.
+ */
+function render() {
+  effect.render(scene, camera);
+}
+
+/**
+ * Animate the scene.
+ */
+function animate() {
+  requestAnimationFrame(animate);
+  update();
+  render();
+}
+
+function createWall(position, inTexture) {
+  var object = new Wall(position, inTexture);
+  object.build(scene);
+}
+
+function createBox() {
+  loader = new THREE.TextureLoader();
+  loader.load( './images/textures/brick/brick2.jpg', function( texture ) {
     texture.anisotropy = renderer.getMaxAnisotropy();
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(8, 8);
+    texture.repeat.set(1, 1);
 
-    var bump = loader.load( "./images/textures/brick/brick_bump.jpg");
+    var bump = loader.load( './images/textures/brick/brick2_bump.jpg');
     bump.anisotropy = renderer.getMaxAnisotropy();
     bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
-    bump.repeat.set(8, 8);
+    bump.repeat.set(1, 1);
 
-    var displace = loader.load( "./images/textures/brick/brick_disp.jpg");
+    var displace = loader.load( './images/textures/brick/brick2_disp.jpg');
     displace.anisotropy = renderer.getMaxAnisotropy();
     displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
-    displace.repeat.set(8, 8);
+    displace.repeat.set(1, 1);
 
-    // Create the floor object.
     var material = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       specular: 0x333333,
@@ -121,141 +201,15 @@ function init() {
       displacementMap: displace,
       bumpMap: bump
     });
-    var geometry = new THREE.SphereGeometry(45, 32, 32);
+
+    var geometry = new THREE.CubeGeometry(500, 500, 500);
     var cube = new THREE.Mesh(geometry, material);
-    cube.position.set(0, 15, 0);
-    cube.rotation.z = Math.PI / 2;
+    cube.position.set(1000, -1000, -1000);
     scene.add(cube);
-
   }, function ( xhr ) {
     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
   },
   function (xhr) {
-    console.log( 'An error has occured loading ' + filePath );
+    console.log( 'An error has occured loading an image' );
   });
-
-  // Lights
-  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
-  scene.add(light);
-
-  light2 = new THREE.PointLight(0xff0000, 2, 100);
-  light2.position.set(50, 50, 50);
-  light2.rotation.y = 0;
-  //rotationPoint.add(light2);
-  scene.add(light2)
-
-  light3 = new THREE.PointLight(0x00ff00, 2, 100);
-  light3.position.set(-50, 50, 50);
-  light3.rotation.y = 2 * Math.PI / 3;
-  //rotationPoint.add(light3);
-  scene.add(light3)
-
-  light4 = new THREE.PointLight(0xffffff, 2, 100);
-  light4.position.set(0, 50, -50);
-  light2.rotation.y = 4 * Math.PI/ 3;
-  //rotationPoint.add(light4);
-  scene.add(light4)
-
-  // Create a floor texture.
-  filePath = './images/textures/wood/wood.jpg';
-  loader = new THREE.TextureLoader();
-  loader.load( filePath, function( texture ) {
-    texture.anisotropy = renderer.getMaxAnisotropy();
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(64, 64);
-
-    var bump = loader.load( "./images/textures/wood/wood_bump.jpg");
-    bump.anisotropy = renderer.getMaxAnisotropy();
-    bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
-    bump.repeat.set(8, 8);
-
-    var displace = loader.load( "./images/textures/wood/wood_disp.jpg");
-    displace.anisotropy = renderer.getMaxAnisotropy();
-    displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
-    displace.repeat.set(4, 4);
-
-    // Create the floor object.
-    var geometry = new THREE.PlaneGeometry(1000, 1000);
-    var material = new THREE.MeshPhongMaterial({
-      shininess: 50,
-      specular: 0x666666,
-      map: texture,
-      displacementMap: displace,
-      bumpMap: bump
-    });
-    var mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = -Math.PI / 2;
-    scene.add(mesh);
-
-  }, function ( xhr ) {
-    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-  },
-  function (xhr) {
-    console.log( 'An error has occured loading ' + filePath );
-  });
-
-
-  window.addEventListener('resize', onWindowResize, false);
-  setTimeout(onWindowResize, 1);
 }
-
-/**
- * Events to fire upon window resizing.
- */
-function onWindowResize() {
-  var width = container.offsetWidth;
-  var height = container.offsetHeight;
-
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(width, height);
-  effect.setSize(width, height);
-}
-
-/**
- * Updates to apply to the scene while running.
- */
-function update(dt) {
-  camera.updateProjectionMatrix();
-  controls.update(dt);
-  if (camera.position.y < 10) {
-    camera.position.y = 10;
-  }
-}
-
-/**
- * Render the scene.
- */
-function render(dt) {
-  rotationPoint.rotation.y += 0.0025;
-  effect.render(scene, camera);
-}
-
-/**
- * Animate the scene.
- */
-function animate(t) {
-  requestAnimationFrame(animate);
-
-  update(clock.getDelta());
-  render(clock.getDelta());
-}
-
-/**
- * Fullscreen manipulation per browser.
- */
-function fullscreen() {
-  if (container.requestFullscreen) {
-    container.requestFullscreen();
-  } else if (container.msRequestFullscreen) {
-    container.msRequestFullscreen();
-  } else if (container.mozRequestFullScreen) {
-    container.mozRequestFullScreen();
-  } else if (container.webkitRequestFullscreen) {
-    container.webkitRequestFullscreen();
-  }
-}
-
-init();
-animate();
