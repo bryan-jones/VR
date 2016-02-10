@@ -1,0 +1,11 @@
+{
+  "name": "carpet",
+  "image": "./assets/textures/carpet/carpet.jpg",
+  "bump": "./assets/textures/carpet/carpet_bump.jpg",
+  "disp": "./assets/textures/carpet/carpet_disp.jpg",
+  "sizeX": "1",
+  "sizeY": "1",
+  "shininess": "5",
+  "specular": "#555555",
+  "color": "#ffffff"
+}

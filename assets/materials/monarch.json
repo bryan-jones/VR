@@ -1,0 +1,11 @@
+{
+  "name": "monarch",
+  "image": "./assets/textures/monarch/monarch.jpg",
+  "bump": "./assets/textures/monarch/monarch_bump.jpg",
+  "disp": "./assets/textures/monarch/monarch_disp.jpg",
+  "sizeX": "1",
+  "sizeY": "1",
+  "shininess": "5",
+  "specular": "#555555",
+  "color": "#ffffff"
+}

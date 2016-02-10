@@ -1,0 +1,11 @@
+{
+  "name": "ceiling",
+  "image": "./assets/textures/ceiling/ceiling.jpg",
+  "bump": "./assets/textures/ceiling/ceiling_bump.jpg",
+  "disp": "./assets/textures/ceiling/ceiling_disp.jpg",
+  "sizeX": "4",
+  "sizeY": "4",
+  "shininess": "5",
+  "specular": "#555555",
+  "color": "#ffffff"
+}
