@@ -3,9 +3,9 @@
   "image": "./assets/textures/carpet/carpet.jpg",
   "bump": "./assets/textures/carpet/carpet_bump.jpg",
   "disp": "./assets/textures/carpet/carpet_disp.jpg",
-  "sizeX": "1",
-  "sizeY": "1",
-  "shininess": "5",
+  "sizeX": "4",
+  "sizeY": "4",
+  "shininess": "0",
   "specular": "#555555",
   "color": "#ffffff"
 }

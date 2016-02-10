@@ -3,9 +3,9 @@
   "image": "./assets/textures/blueDryWall/blueDryWall.jpg",
   "bump": "./assets/textures/blueDryWall/blueDryWall_bump.jpg",
   "disp": "./assets/textures/blueDryWall/blueDryWall_disp.jpg",
-  "sizeX": "1",
-  "sizeY": "1",
-  "shininess": "5",
+  "sizeX": "2",
+  "sizeY": "2",
+  "shininess": "1",
   "specular": "#555555",
   "color": "#ffffff"
 }
