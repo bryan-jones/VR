@@ -68,7 +68,8 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  camera.position.set(0, 0, 50);
+  camera.position.set(0, 0, 0);
+  camera.translateZ( 50 );
   scene.add(camera);
 
   // Create the point of rotation for the lights.
