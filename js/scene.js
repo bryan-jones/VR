@@ -69,6 +69,7 @@ function init() {
     10000 // Far view.
   );
   camera.position.z = 50;
+  camera.rotation.y = Math.PI;
   scene.add(camera);
 
   // Create the point of rotation for the lights.
