@@ -12,7 +12,7 @@
  *   The texture to be used.
  */
 var Wall = function(position, texture, moveZ, moveX) {
-  this.size = 3000;
+  this.size = 1000;
   this.moveZ = typeof moveZ !== 'undefined' ? moveZ : 0;
   this.moveX = typeof moveX !== 'undefined' ? moveX : 0;
   this.position = position;
@@ -27,8 +27,10 @@ var Wall = function(position, texture, moveZ, moveX) {
 
   if (position == 'front') {
     var posZ = -1 * (this.size/2) - this.moveZ * this.size;
+    var posX = this.moveX * this.size;
   } else if (position == 'back') {
     var posZ = this.size/2 - this.moveZ * this.size;
+    var posX = this.moveX * this.size;
     var rotateY = Math.PI;
   } else if (position == 'left') {
     var posX = -1 * (this.size/2) + this.moveX * this.size;
@@ -39,11 +41,14 @@ var Wall = function(position, texture, moveZ, moveX) {
     var posZ = -1 * (this.moveZ * this.size);
     var rotateY = -Math.PI/2;
   } else if (position == 'top') {
-    var posY = this.size/2 - this.moveZ * this.size;
+    var posY = this.size/2;
+    var posZ = -1 * (this.moveZ * this.size);
+    var posX = this.moveX * this.size;
     var rotateX = Math.PI/2;
   } else if (position == 'bottom') {
     var posY = -1 * (this.size/2);
     var posZ = -1 * (this.moveZ * this.size);
+    var posX = this.moveX * this.size;
     var rotateX = -Math.PI/2;
   }
 

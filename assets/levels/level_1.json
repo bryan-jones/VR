@@ -5,8 +5,8 @@
         "front": null,
         "back": "wood",
         "left": "wood",
-        "right": "wood",
-        "top": null,
+        "right": null,
+        "top": "wood",
         "bottom": "stone"
       }
     },
@@ -15,8 +15,102 @@
         "front": null,
         "back": null,
         "left": "wood",
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "2": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": "wood",
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "3": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": "wood",
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "4": {
+      "walls": {
+        "front": "wood",
+        "back": null,
+        "left": "wood",
         "right": "wood",
-        "top": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    }
+  },
+  "1": {
+    "0": {
+      "walls": {
+        "front": null,
+        "back": "wood",
+        "left": null,
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "1": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "2": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": null,
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "3": {
+      "walls": {
+        "front": "wood",
+        "back": null,
+        "left": null,
+        "right": "wood",
+        "top": "wood",
+        "bottom": "stone"
+      }
+    }
+  },
+  "2": {
+    "0": {
+      "walls": {
+        "front": null,
+        "back": "wood",
+        "left": null,
+        "right": "wood",
+        "top": "wood",
+        "bottom": "stone"
+      }
+    },
+    "1": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": "wood",
+        "top": "wood",
         "bottom": "stone"
       }
     },
@@ -24,9 +118,9 @@
       "walls": {
         "front": "wood",
         "back": null,
-        "left": "wood",
+        "left": null,
         "right": "wood",
-        "top": null,
+        "top": "wood",
         "bottom": "stone"
       }
     }

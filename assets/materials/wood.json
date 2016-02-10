@@ -5,7 +5,7 @@
   "disp": "./assets/textures/wood/wood_disp.jpg",
   "sizeX": "10",
   "sizeY": "10",
-  "shininess": "50",
+  "shininess": "5",
   "specular": "#555555",
   "color": "#ffffff"
 }

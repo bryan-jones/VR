@@ -68,8 +68,7 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  camera.position.z = 50;
-  camera.rotation.y = Math.PI;
+  camera.position.set(0, 0, 50);
   scene.add(camera);
 
   // Create the point of rotation for the lights.
@@ -105,16 +104,22 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
   // Lights
-  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
-  scene.add(light);
+  //var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  //scene.add(light);
 
   var light2 = new THREE.PointLight( 0xffffff, 2, 6000);
-  light2.position.set( 0, 3000, -6000 );
+  light2.position.set( 3000, 450, -4000 );
   rotationPoint.add( light2 );
 
-  var light3 = new THREE.PointLight( 0xffffee, 3, 4000, 1);
-  light3.position.set( 0, 3000, -4000 );
+  var light3 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
+  light3.position.set( 1000, 250, -2000 );
   scene.add( light3 );
+  var light4 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
+  light4.position.set( 0, 250, -1000 );
+  scene.add( light4 );
+  var light5 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
+  light5.position.set( 2000, 250, 0 );
+  scene.add( light5 );
 
   /*var spotLight = new THREE.SpotLight( 0xffffff, 1);
   spotLight.position.set( -1200, -1480, 0 );
@@ -140,6 +145,7 @@ function init() {
 
   // Add a box.
   createBox(500, 500, 500, 1000, -1000, -1000, 'brick');
+  createBox(500, 500, 500, -200, -1000, -4000, 'brick', 0, Math.PI/4);
 
   // Create a level.
   var level = new Level(1);
@@ -183,9 +189,10 @@ function animate() {
   render();
 }
 
-function createWall(position, inTexture, inLocation) {
-  inLocation = typeof inLocation !== 'undefined' ? inLocation : 0;
-  var object = new Wall(position, inTexture, inLocation);
+function createWall(position, inTexture, inMoveZ, inMoveX) {
+  inMoveZ = typeof inMoveZ !== 'undefined' ? inMoveZ : 0;
+  inMoveX = typeof inMoveX !== 'undefined' ? inMoveX : 0;
+  var object = new Wall(position, inTexture, inMoveZ, inMoveX);
   object.build(scene);
 }
 
