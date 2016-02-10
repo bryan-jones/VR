@@ -84,7 +84,6 @@ function init() {
 
   // Add the VR screen effect.
   effect = new THREE.StereoEffect(renderer);
-  effect.eyeSeparation = 10;
   effect.setSize( window.innerWidth, window.innerHeight );
 
   // Build the controls.
@@ -105,22 +104,28 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
   // Lights
-  //var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
-  //scene.add(light);
+  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  scene.add(light);
+
+  var ambient = new THREE.AmbientLight( 0x888888 ); // soft white light
+  scene.add( ambient );
 
   var light2 = new THREE.PointLight( 0xffffff, 2, 6000);
   light2.position.set( 3000, 450, -4000 );
   rotationPoint.add( light2 );
 
-  var light3 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
-  light3.position.set( 1000, 250, -2000 );
+  var light3 = new THREE.PointLight( 0xffffee, 0.25, 3000);
+  light3.position.set( 1500, 250, -3000 );
   scene.add( light3 );
-  var light4 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
-  light4.position.set( 0, 250, -1000 );
+  var light4 = new THREE.PointLight( 0xffffee, 0.25, 3000);
+  light4.position.set( 0, 250, 0 );
   scene.add( light4 );
-  var light5 = new THREE.PointLight( 0xffffee, 1, 4000, 1);
+  var light5 = new THREE.PointLight( 0xffffee, 0.25, 3000);
   light5.position.set( 2000, 250, 0 );
   scene.add( light5 );
+  var light6 = new THREE.PointLight( 0xffffee, 0.25, 3000);
+  light6.position.set( 0, 250, -3000 );
+  scene.add( light6 );
 
   /*var spotLight = new THREE.SpotLight( 0xffffff, 1);
   spotLight.position.set( -1200, -1480, 0 );

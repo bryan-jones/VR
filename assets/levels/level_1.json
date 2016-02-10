@@ -4,7 +4,7 @@
       "walls": {
         "front": null,
         "back": "blueDryWall",
-        "left": "blueDryWall",
+        "left": "whiteDryWall",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"
@@ -14,7 +14,7 @@
       "walls": {
         "front": null,
         "back": null,
-        "left": "blueDryWall",
+        "left": "whiteDryWall",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"
@@ -24,7 +24,7 @@
       "walls": {
         "front": null,
         "back": null,
-        "left": "blueDryWall",
+        "left": "whiteDryWall",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"
@@ -34,7 +34,7 @@
       "walls": {
         "front": null,
         "back": null,
-        "left": "blueDryWall",
+        "left": "whiteDryWall",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"
@@ -42,10 +42,10 @@
     },
     "4": {
       "walls": {
-        "front": "monarch",
+        "front": "whiteDryWall",
         "back": null,
-        "left": "blueDryWall",
-        "right": "blueDryWall",
+        "left": "whiteDryWall",
+        "right": null,
         "top": "ceiling",
         "bottom": "carpet"
       }
@@ -84,10 +84,20 @@
     },
     "3": {
       "walls": {
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": null,
+        "top": "ceiling",
+        "bottom": "carpet"
+      }
+    },
+    "4": {
+      "walls": {
         "front": "monarch",
         "back": null,
         "left": null,
-        "right": "blueDryWall",
+        "right": null,
         "top": "ceiling",
         "bottom": "carpet"
       }
@@ -116,7 +126,27 @@
     },
     "2": {
       "walls": {
-        "front": "monarch",
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": "blueDryWall",
+        "top": "ceiling",
+        "bottom": "carpet"
+      }
+    },
+    "3": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": null,
+        "right": "blueDryWall",
+        "top": "ceiling",
+        "bottom": "carpet"
+      }
+    },
+    "4": {
+      "walls": {
+        "front": "whiteDryWall",
         "back": null,
         "left": null,
         "right": "blueDryWall",

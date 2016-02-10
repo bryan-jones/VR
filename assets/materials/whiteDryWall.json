@@ -1,0 +1,11 @@
+{
+  "name": "whiteDryWall",
+  "image": "./assets/textures/whiteDryWall/whiteDryWall.jpg",
+  "bump": "./assets/textures/whiteDryWall/whiteDryWall_bump.jpg",
+  "disp": "./assets/textures/whiteDryWall/whiteDryWall_disp.jpg",
+  "sizeX": "1",
+  "sizeY": "1",
+  "shininess": "0",
+  "specular": "#222222",
+  "color": "#ffffff"
+}
