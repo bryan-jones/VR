@@ -84,7 +84,8 @@ function init() {
 
   // Add the VR screen effect.
   effect = new THREE.StereoEffect(renderer);
-  effect.setSize( window.innerWidth, window.innerHeight );
+  effect.setSize( window.innerWidth, window.innerHeight);
+  effect.focalLength = 25;
 
   // Build the controls.
   controls = new THREE.OrbitControls(camera, element);
