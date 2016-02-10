@@ -1,0 +1,11 @@
+{
+  "name": "stone",
+  "image": "./assets/textures/stone/stone.jpg",
+  "bump": "./assets/textures/stone/stone_bump.jpg",
+  "disp": "./assets/textures/stone/stone_disp.jpg",
+  "sizeX": "2",
+  "sizeY": "2",
+  "shininess": "30",
+  "specular": "#333333",
+  "color": "#cccccc"
+}

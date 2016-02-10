@@ -1,0 +1,11 @@
+{
+  "name": "wood",
+  "image": "./assets/textures/wood/wood.jpg",
+  "bump": "./assets/textures/wood/wood_bump.jpg",
+  "disp": "./assets/textures/wood/wood_disp.jpg",
+  "sizeX": "10",
+  "sizeY": "10",
+  "shininess": "50",
+  "specular": "#555555",
+  "color": "#ffffff"
+}

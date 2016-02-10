@@ -1,0 +1,34 @@
+{
+  "0": {
+    "0": {
+      "walls": {
+        "front": null,
+        "back": "wood",
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone"
+      }
+    },
+    "1": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone"
+      }
+    },
+    "2": {
+      "walls": {
+        "front": "wood",
+        "back": null,
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone"
+      }
+    }
+  }
+}

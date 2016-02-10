@@ -1,0 +1,34 @@
+{
+  "row": {
+    "location": {
+      "walls": {
+        "front": null,
+        "back": "wood",
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone",
+      }
+    },
+    "location": {
+      "walls": {
+        "front": null,
+        "back": null,
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone",
+      }
+    },
+    "location": {
+      "walls": {
+        "front": "wood",
+        "back": null,
+        "left": "wood",
+        "right": "wood",
+        "top": null,
+        "bottom": "stone",
+      }
+    },
+  }
+}

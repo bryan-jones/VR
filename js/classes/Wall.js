@@ -11,9 +11,10 @@
  * @param string texture
  *   The texture to be used.
  */
-var Wall = function(position, texture) {
-  this.height = 3000;
-  this.width = 3000;
+var Wall = function(position, texture, moveZ, moveX) {
+  this.size = 3000;
+  this.moveZ = typeof moveZ !== 'undefined' ? moveZ : 0;
+  this.moveX = typeof moveX !== 'undefined' ? moveX : 0;
   this.position = position;
   this.texture = typeof texture !== 'undefined' ? texture : undefined;
 
@@ -25,21 +26,24 @@ var Wall = function(position, texture) {
   var rotateZ = 0;
 
   if (position == 'front') {
-    var posZ = -1500;
+    var posZ = -1 * (this.size/2) - this.moveZ * this.size;
   } else if (position == 'back') {
-    var posZ = 1500;
+    var posZ = this.size/2 - this.moveZ * this.size;
     var rotateY = Math.PI;
   } else if (position == 'left') {
-    var posX = -1500;
+    var posX = -1 * (this.size/2) + this.moveX * this.size;
+    var posZ = -1 * (this.moveZ * this.size);
     var rotateY = Math.PI/2;
   } else if (position == 'right') {
-    var posX = 1500;
+    var posX = this.size/2 + this.moveX * this.size;
+    var posZ = -1 * (this.moveZ * this.size);
     var rotateY = -Math.PI/2;
   } else if (position == 'top') {
-    var posY = 1500;
+    var posY = this.size/2 - this.moveZ * this.size;
     var rotateX = Math.PI/2;
   } else if (position == 'bottom') {
-    var posY = -1500;
+    var posY = -1 * (this.size/2);
+    var posZ = -1 * (this.moveZ * this.size);
     var rotateX = -Math.PI/2;
   }
 
@@ -53,7 +57,7 @@ var Wall = function(position, texture) {
 
 Wall.prototype.build = function(scene) {
   // Build the wall object.
-  var geometry = new THREE.PlaneGeometry( this.height, this.width );
+  var geometry = new THREE.PlaneGeometry( this.size, this.size );
   var material;
 
   if (typeof this.texture !== 'undefined') {
@@ -61,22 +65,22 @@ Wall.prototype.build = function(scene) {
     var materialJSON;
     var texture = this.texture;
 
-    loadJSON("./materials/" + this.texture + ".json", this, function(wall, response) {
+    loadJSON(MATERIAL_PATH + this.texture + ".json", this, function(wall, response) {
       var material;
       materialJSON = JSON.parse(response);
 
       loader = new THREE.TextureLoader();
-      var inTexture = loader.load( TEXTURE_PATH + wall.texture + '/' + wall.texture + '.jpg');
+      var inTexture = loader.load( materialJSON.image );
       inTexture.anisotropy = renderer.getMaxAnisotropy();
       inTexture.wrapS = inTexture.wrapT = THREE.RepeatWrapping;
       inTexture.repeat.set(materialJSON.sizeX, materialJSON.sizeY);
 
-      var bump = loader.load( TEXTURE_PATH + wall.texture + '/' + wall.texture + '_bump.jpg' );
+      var bump = loader.load( materialJSON.bump );
       bump.anisotropy = renderer.getMaxAnisotropy();
       bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
       bump.repeat.set(materialJSON.sizeX, materialJSON.sizeY);
 
-      var displace = loader.load( TEXTURE_PATH + wall.texture + '/' + wall.texture + '_disp.jpg' );
+      var displace = loader.load( materialJSON.disp );
       displace.anisotropy = renderer.getMaxAnisotropy();
       displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
       displace.repeat.set(materialJSON.sizeX, materialJSON.sizeY);

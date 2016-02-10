@@ -12,7 +12,9 @@
  * Define constants.
  */
 const IMAGE_PATH = './images/';
-const TEXTURE_PATH = './images/textures/';
+const TEXTURE_PATH = './assets/textures/';
+const MATERIAL_PATH = './assets/materials/';
+const LEVEL_PATH = './assets/levels/';
 
 /**
  * Create the animation request.
@@ -57,7 +59,7 @@ function init() {
 
   // Create the scene.
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x000000, 0.0003 );
+  scene.fog = new THREE.FogExp2( 0x000000, 0.00015 );
 
   // Create the camera.
   camera = new THREE.PerspectiveCamera(
@@ -105,13 +107,16 @@ function init() {
   var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
   scene.add(light);
 
-  var light2 = new THREE.PointLight( 0xffffff, 2, 6000, 1);
-  light2.position.set( 0, 3000, 1500 );
+  var light2 = new THREE.PointLight( 0xffffff, 2, 6000);
+  light2.position.set( 0, 3000, -6000 );
   rotationPoint.add( light2 );
 
+  var light3 = new THREE.PointLight( 0xffffee, 3, 4000, 1);
+  light3.position.set( 0, 3000, -4000 );
+  scene.add( light3 );
 
-  var spotLight = new THREE.SpotLight( 0xffffff, 1);
-  spotLight.position.set( -1200, -1480, -1450 );
+  /*var spotLight = new THREE.SpotLight( 0xffffff, 1);
+  spotLight.position.set( -1200, -1480, 0 );
 
   spotLight.castShadow = true;
 
@@ -123,16 +128,21 @@ function init() {
   spotLight.shadowCameraFov = 30;
 
   scene.add( spotLight );
+  */
 
   // Create a floor texture.
-  createWall('front', 'wood');
+  /*createWall('front', 'wood');
   createWall('back', 'wood');
-  createWall('bottom', 'brick');
+  createWall('bottom', 'stone');
   createWall('left', 'wood');
-  createWall('right', 'wood');
+  createWall('right', 'wood');*/
 
   // Add a box.
-  createBox();
+  createBox(500, 500, 500, 1000, -1000, -1000, 'brick');
+
+  // Create a level.
+  var level = new Level(1);
+  level.build();
 
   window.addEventListener('resize', onWindowResize, false);
 }
@@ -153,7 +163,7 @@ function onWindowResize() {
 function update() {
   camera.updateProjectionMatrix();
   controls.update();
-  rotationPoint.rotation.y += 0.005;
+  rotationPoint.rotation.y += 0.01;
 }
 
 /**
@@ -172,44 +182,17 @@ function animate() {
   render();
 }
 
-function createWall(position, inTexture) {
-  var object = new Wall(position, inTexture);
+function createWall(position, inTexture, inLocation) {
+  inLocation = typeof inLocation !== 'undefined' ? inLocation : 0;
+  var object = new Wall(position, inTexture, inLocation);
   object.build(scene);
 }
 
-function createBox() {
-  loader = new THREE.TextureLoader();
-  loader.load( './images/textures/brick/brick2.jpg', function( texture ) {
-    texture.anisotropy = renderer.getMaxAnisotropy();
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(1, 1);
+function createBox( length, width, height, posX, posY, posZ, inTexture, rotateX, rotateY, rotateZ ) {
+  rotateX = typeof rotateX !== 'undefined' ? rotateX : 0;
+  rotateY = typeof rotateY !== 'undefined' ? rotateY : 0;
+  rotateZ = typeof rotateZ !== 'undefined' ? rotateZ : 0;
 
-    var bump = loader.load( './images/textures/brick/brick2_bump.jpg');
-    bump.anisotropy = renderer.getMaxAnisotropy();
-    bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
-    bump.repeat.set(1, 1);
-
-    var displace = loader.load( './images/textures/brick/brick2_disp.jpg');
-    displace.anisotropy = renderer.getMaxAnisotropy();
-    displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
-    displace.repeat.set(1, 1);
-
-    var material = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      specular: 0x333333,
-      map: texture,
-      displacementMap: displace,
-      bumpMap: bump
-    });
-
-    var geometry = new THREE.CubeGeometry(500, 500, 500);
-    var cube = new THREE.Mesh(geometry, material);
-    cube.position.set(1000, -1000, -1000);
-    scene.add(cube);
-  }, function ( xhr ) {
-    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-  },
-  function (xhr) {
-    console.log( 'An error has occured loading an image' );
-  });
+  var object = new Box( length, width, height, posX, posY, posZ, inTexture, rotateX, rotateY, rotateZ );
+  object.build(scene);
 }

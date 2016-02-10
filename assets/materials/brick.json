@@ -1,0 +1,11 @@
+{
+  "name": "brick",
+  "image": "./assets/textures/brick/brick.jpg",
+  "bump": "./assets/textures/brick/brick_bump.jpg",
+  "disp": "./assets/textures/brick/brick_disp.jpg",
+  "sizeX": "0.3",
+  "sizeY": "0.3",
+  "shininess": "10",
+  "specular": "#333333",
+  "color": "#cccccc"
+}
