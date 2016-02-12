@@ -5,7 +5,7 @@
   "disp": "./assets/textures/whiteDryWall/whiteDryWall_disp.jpg",
   "sizeX": "1",
   "sizeY": "1",
-  "shininess": "0",
-  "specular": "#222222",
+  "shininess": "1",
+  "specular": "#333333",
   "color": "#ffffff"
 }

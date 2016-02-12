@@ -1,11 +1,12 @@
 {
   "name": "ceiling",
+  "type": "phong",
   "image": "./assets/textures/ceiling/ceiling.jpg",
   "bump": "./assets/textures/ceiling/ceiling_bump.jpg",
   "disp": "./assets/textures/ceiling/ceiling_disp.jpg",
   "sizeX": "2",
   "sizeY": "2",
   "shininess": "5",
-  "specular": "#aaaaaa",
+  "specular": "#333333",
   "color": "#ffffff"
 }

@@ -12,7 +12,7 @@
  *   The texture to be used.
  */
 var Wall = function(position, texture, moveZ, moveX) {
-  this.size = 1000;
+  this.size = 70;
   this.moveZ = typeof moveZ !== 'undefined' ? moveZ : 0;
   this.moveX = typeof moveX !== 'undefined' ? moveX : 0;
   this.position = position;
@@ -28,25 +28,28 @@ var Wall = function(position, texture, moveZ, moveX) {
   if (position == 'front') {
     var posZ = -1 * (this.size/2) - this.moveZ * this.size;
     var posX = this.moveX * this.size;
+    var posY = this.size/2;
   } else if (position == 'back') {
     var posZ = this.size/2 - this.moveZ * this.size;
     var posX = this.moveX * this.size;
+    var posY = this.size/2;
     var rotateY = Math.PI;
   } else if (position == 'left') {
     var posX = -1 * (this.size/2) + this.moveX * this.size;
     var posZ = -1 * (this.moveZ * this.size);
+    var posY = this.size/2;
     var rotateY = Math.PI/2;
   } else if (position == 'right') {
     var posX = this.size/2 + this.moveX * this.size;
     var posZ = -1 * (this.moveZ * this.size);
+    var posY = this.size/2;
     var rotateY = -Math.PI/2;
   } else if (position == 'top') {
-    var posY = this.size/2;
+    var posY = this.size;
     var posZ = -1 * (this.moveZ * this.size);
     var posX = this.moveX * this.size;
     var rotateX = Math.PI/2;
   } else if (position == 'bottom') {
-    var posY = -1 * (this.size/2);
     var posZ = -1 * (this.moveZ * this.size);
     var posX = this.moveX * this.size;
     var rotateX = -Math.PI/2;
@@ -92,12 +95,17 @@ Wall.prototype.build = function(scene) {
 
       material = new THREE.MeshPhongMaterial({
         color: materialJSON.color,
-        shininess: materialJSON.shininess,
+        shininess: parseInt(materialJSON.shininess),
         specular: materialJSON.specular,
         map: inTexture,
         displacementMap: displace,
-        bumpMap: bump
+        bumpMap: bump,
+        bumpScale: typeof materialJSON.bumpScale !== 'undefined' ? materialJSON.bumpScale : 0.10,
+        shading: typeof materialJSON.shading !== 'undefined' ? materialJSON.shading : THREE.SmoothShading
       });
+      if (materialJSON.name == "ceiling") {
+        console.log(materialJSON.color);
+      }
 
       var mesh = new THREE.Mesh( geometry, material );
       mesh.position.set( wall.posX, wall.posY, wall.posZ );

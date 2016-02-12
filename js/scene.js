@@ -45,6 +45,7 @@ var camera,
 var light2,
     light3,
     light4;
+var stats = new Stats();
 
 init();
 animate();
@@ -68,9 +69,13 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  camera.position.set(0, 0, 0);
-  camera.translateZ( 50 );
-  scene.add(camera);
+  camera.position.set( 0, 35, 0 );
+  camera.translateZ( 1 );
+  camera.position.x = 70;
+  camera.position.z = -140;
+  camera.position.y = 35;
+  // camera.lookAt( 140, 35, -1000 );
+  scene.add( camera );
 
   // Create the point of rotation for the lights.
   rotationPoint = new THREE.Object3D();
@@ -79,18 +84,20 @@ function init() {
   // Build the renderer.
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild(element);
 
   // Add the VR screen effect.
-  effect = new THREE.StereoEffect(renderer);
-  effect.setSize( window.innerWidth, window.innerHeight);
-  //effect.focalLength = 10;
+  effect = new THREE.StereoEffect( renderer );
+  effect.setSize( window.innerWidth, window.innerHeight );
   effect.separation = 0;
+
   // Build the controls.
-  controls = new THREE.OrbitControls(camera, element);
-  controls.enablePan = false;
-  controls.enableZoom = false;
+  controls = new THREE.OrbitControls( camera, element );
+  //controls.enablePan = false;
+  //controls.enableZoom = false;
+  controls.target.copy( new THREE.Vector3( 70, 30, -140));
+  // controls.set = new THREE.Vector3( 70, 30, -400 );
 
   function setOrientationControls(e) {
     if (!e.alpha) {
@@ -105,58 +112,97 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
   // Lights
-  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  var light = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
   scene.add(light);
 
   var ambient = new THREE.AmbientLight( 0x888888 ); // soft white light
   scene.add( ambient );
 
-  var light2 = new THREE.PointLight( 0xffffff, 2, 6000);
-  light2.position.set( 3000, 450, -4000 );
+  var light2 = new THREE.PointLight( 0xffffff, 0.5, 300);
+  light2.position.set( 170, 65, -200 );
   rotationPoint.add( light2 );
 
-  var light3 = new THREE.PointLight( 0xffffee, 0.25, 3000);
-  light3.position.set( 1500, 250, -3000 );
+  var light3 = new THREE.PointLight( 0xffffee, 0.25, 30);
+  light3.position.set( 145, 60, -200 );
   scene.add( light3 );
-  var light4 = new THREE.PointLight( 0xffffee, 0.25, 3000);
-  light4.position.set( 0, 250, 0 );
+  var light4 = new THREE.PointLight( 0xffffee, 0.25, 30);
+  light4.position.set( 0, 60, 0 );
   scene.add( light4 );
-  var light5 = new THREE.PointLight( 0xffffee, 0.25, 3000);
-  light5.position.set( 2000, 250, 0 );
+  var light5 = new THREE.PointLight( 0xffffee, 0.25, 30);
+  light5.position.set( 145, 60, 0 );
   scene.add( light5 );
-  var light6 = new THREE.PointLight( 0xffffee, 0.25, 3000);
-  light6.position.set( 0, 250, -3000 );
+  var light6 = new THREE.PointLight( 0xffffee, 0.25, 30);
+  light6.position.set( 0, 60, -200 );
   scene.add( light6 );
 
-  /*var spotLight = new THREE.SpotLight( 0xffffff, 1);
-  spotLight.position.set( -1200, -1480, 0 );
-
-  spotLight.castShadow = true;
-
-  spotLight.shadowMapWidth = 1024;
-  spotLight.shadowMapHeight = 1024;
-
-  spotLight.shadowCameraNear = 500;
-  spotLight.shadowCameraFar = 4000;
-  spotLight.shadowCameraFov = 30;
-
-  scene.add( spotLight );
-  */
-
-  // Create a floor texture.
-  /*createWall('front', 'wood');
-  createWall('back', 'wood');
-  createWall('bottom', 'stone');
-  createWall('left', 'wood');
-  createWall('right', 'wood');*/
-
   // Add a box.
-  createBox(500, 500, 500, 1000, -1000, -1000, 'brick');
-  createBox(500, 500, 500, -200, -1000, -4000, 'brick', 0, Math.PI/4);
+  //createBox(500, 500, 500, 1000, -1000, -1000, 'brick');
+  //createBox(500, 500, 500, -200, -1000, -4000, 'brick', 0, Math.PI/4);
+
+    var mesh = null;
+    var loader = new THREE.JSONLoader();
+    loader.load('./assets/models/desk/desk.json', function(geometry) {
+
+      loader2 = new THREE.TextureLoader();
+      var inTexture = loader2.load( './assets/textures/wood/wood.jpg' );
+      inTexture.anisotropy = renderer.getMaxAnisotropy();
+      inTexture.wrapS = inTexture.wrapT = THREE.RepeatWrapping;
+      inTexture.repeat.set(1, 1);
+
+      var bump = loader2.load( './assets/textures/wood/wood_bump.jpg' );
+      bump.anisotropy = renderer.getMaxAnisotropy();
+      bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
+      bump.repeat.set(4, 4);
+
+      var displace = loader2.load( './assets/textures/wood/wood_disp.jpg' );
+      displace.anisotropy = renderer.getMaxAnisotropy();
+      displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
+      displace.repeat.set(4, 4);
+
+      material = new THREE.MeshLambertMaterial({
+        color: '#ffffff',
+        shininess: '20',
+        specular: '#666666',
+        map: inTexture,
+        //displacementMap: displace,
+        //bumpMap: bump
+      });
+
+      mesh = new THREE.Mesh(geometry, material);
+      mesh2 = new THREE.Mesh(geometry, material);
+      mesh3 = new THREE.Mesh(geometry, material);
+      mesh4 = new THREE.Mesh(geometry, material);
+
+      mesh.rotation.y = -Math.PI/2;
+      mesh.position.set( -4, 1.5, -18 );
+      scene.add(mesh);
+
+      mesh2.rotation.y = -Math.PI/2;
+      mesh2.position.set( 120, 1.5, -18 );
+      scene.add(mesh2);
+
+      mesh3.rotation.y = -2 *Math.PI;
+      mesh3.position.set( 130, 1.5, -255 );
+      scene.add(mesh3);
+
+      mesh4.rotation.y = Math.PI/2;
+      mesh4.position.set( 60, 1.5, -265 );
+      scene.add(mesh4);
+    });
 
   // Create a level.
   var level = new Level(1);
   level.build();
+
+  // Show FPS
+  stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
+
+  // align top-left
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+
+  document.body.appendChild( stats.domElement );
 
   window.addEventListener('resize', onWindowResize, false);
 }
@@ -192,8 +238,10 @@ function render() {
  */
 function animate() {
   requestAnimationFrame(animate);
+  stats.begin();
   update();
   render();
+  stats.end();
 }
 
 function createWall(position, inTexture, inMoveZ, inMoveX) {
