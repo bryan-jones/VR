@@ -21,9 +21,9 @@ var Wall = function(position, texture, moveZ, moveX) {
   var posX = 0;
   var posY = 0;
   var posZ = 0;
-  var rotateX = 0;
-  var rotateY = 0;
-  var rotateZ = 0;
+  var rotX = 0;
+  var rotY = 0;
+  var rotZ = 0;
 
   if (position == 'front') {
     var posZ = -1 * (this.size/2) - this.moveZ * this.size;
@@ -33,34 +33,34 @@ var Wall = function(position, texture, moveZ, moveX) {
     var posZ = this.size/2 - this.moveZ * this.size;
     var posX = this.moveX * this.size;
     var posY = this.size/2;
-    var rotateY = Math.PI;
+    var rotY = Math.PI;
   } else if (position == 'left') {
     var posX = -1 * (this.size/2) + this.moveX * this.size;
     var posZ = -1 * (this.moveZ * this.size);
     var posY = this.size/2;
-    var rotateY = Math.PI/2;
+    var rotY = Math.PI/2;
   } else if (position == 'right') {
     var posX = this.size/2 + this.moveX * this.size;
     var posZ = -1 * (this.moveZ * this.size);
     var posY = this.size/2;
-    var rotateY = -Math.PI/2;
+    var rotY = -Math.PI/2;
   } else if (position == 'top') {
     var posY = this.size;
     var posZ = -1 * (this.moveZ * this.size);
     var posX = this.moveX * this.size;
-    var rotateX = Math.PI/2;
+    var rotX = Math.PI/2;
   } else if (position == 'bottom') {
     var posZ = -1 * (this.moveZ * this.size);
     var posX = this.moveX * this.size;
-    var rotateX = -Math.PI/2;
+    var rotX = -Math.PI/2;
   }
 
   this.posX = posX;
   this.posY = posY;
   this.posZ = posZ;
-  this.rotateX = rotateX;
-  this.rotateY = rotateY;
-  this.rotateZ = rotateZ;
+  this.rotX = rotX;
+  this.rotY = rotY;
+  this.rotZ = rotZ;
 };
 
 Wall.prototype.build = function(scene) {
@@ -69,55 +69,13 @@ Wall.prototype.build = function(scene) {
   var material;
 
   if (typeof this.texture !== 'undefined') {
-    // Load texture information.
-    var materialJSON;
-    var texture = this.texture;
-
-    loadJSON(MATERIAL_PATH + this.texture + ".json", this, function(wall, response) {
-      var material;
-      materialJSON = JSON.parse(response);
-
-      loader = new THREE.TextureLoader();
-      var inTexture = loader.load( materialJSON.image );
-      inTexture.anisotropy = renderer.getMaxAnisotropy();
-      inTexture.wrapS = inTexture.wrapT = THREE.RepeatWrapping;
-      inTexture.repeat.set(materialJSON.sizeX, materialJSON.sizeY);
-
-      var bump = loader.load( materialJSON.bump );
-      bump.anisotropy = renderer.getMaxAnisotropy();
-      bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
-      bump.repeat.set(materialJSON.sizeX, materialJSON.sizeY);
-
-      var displace = loader.load( materialJSON.disp );
-      displace.anisotropy = renderer.getMaxAnisotropy();
-      displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
-      displace.repeat.set(materialJSON.sizeX, materialJSON.sizeY);
-
-      material = new THREE.MeshPhongMaterial({
-        color: materialJSON.color,
-        shininess: parseInt(materialJSON.shininess),
-        specular: materialJSON.specular,
-        map: inTexture,
-        displacementMap: displace,
-        bumpMap: bump,
-        bumpScale: typeof materialJSON.bumpScale !== 'undefined' ? materialJSON.bumpScale : 0.10,
-        shading: typeof materialJSON.shading !== 'undefined' ? materialJSON.shading : THREE.SmoothShading
-      });
-      if (materialJSON.name == "ceiling") {
-        console.log(materialJSON.color);
-      }
-
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( wall.posX, wall.posY, wall.posZ );
-      mesh.rotation.set( wall.rotateX, wall.rotateY, wall.rotateZ );
-      scene.add(mesh);
-    });
+    material = buildObject(this.texture, this, geometry);
   } else {
     material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
     var mesh = new THREE.Mesh( geometry, material );
     mesh.position.set( this.posX, this.posY, this.posZ );
-    mesh.rotation.set( this.rotateX, this.rotateY, this.rotateZ );
+    mesh.rotation.set( this.rotX, this.rotY, this.rotZ );
     scene.add(mesh);
   }
 };

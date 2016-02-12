@@ -11,11 +11,9 @@
 /**
  * Define constants.
  */
-const IMAGE_PATH = './images/';
 const TEXTURE_PATH = './assets/textures/';
-const MATERIAL_PATH = './assets/materials/';
 const LEVEL_PATH = './assets/levels/';
-
+const MODEL_PATH = './assets/models/';
 /**
  * Create the animation request.
  */
@@ -74,12 +72,7 @@ function init() {
   camera.position.x = 70;
   camera.position.z = -140;
   camera.position.y = 35;
-  // camera.lookAt( 140, 35, -1000 );
   scene.add( camera );
-
-  // Create the point of rotation for the lights.
-  rotationPoint = new THREE.Object3D();
-  scene.add( rotationPoint );
 
   // Build the renderer.
   renderer = new THREE.WebGLRenderer();
@@ -94,10 +87,9 @@ function init() {
 
   // Build the controls.
   controls = new THREE.OrbitControls( camera, element );
-  //controls.enablePan = false;
-  //controls.enableZoom = false;
-  controls.target.copy( new THREE.Vector3( 70, 30, -140));
-  // controls.set = new THREE.Vector3( 70, 30, -400 );
+  controls.enablePan = false;
+  controls.enableZoom = false;
+  controls.target.copy( new THREE.Vector3( 70, 50, -140));
 
   function setOrientationControls(e) {
     if (!e.alpha) {
@@ -118,77 +110,54 @@ function init() {
   var ambient = new THREE.AmbientLight( 0x888888 ); // soft white light
   scene.add( ambient );
 
-  var light2 = new THREE.PointLight( 0xffffff, 0.5, 300);
-  light2.position.set( 170, 65, -200 );
-  rotationPoint.add( light2 );
-
-  var light3 = new THREE.PointLight( 0xffffee, 0.25, 30);
-  light3.position.set( 145, 60, -200 );
-  scene.add( light3 );
-  var light4 = new THREE.PointLight( 0xffffee, 0.25, 30);
-  light4.position.set( 0, 60, 0 );
-  scene.add( light4 );
-  var light5 = new THREE.PointLight( 0xffffee, 0.25, 30);
-  light5.position.set( 145, 60, 0 );
-  scene.add( light5 );
-  var light6 = new THREE.PointLight( 0xffffee, 0.25, 30);
-  light6.position.set( 0, 60, -200 );
-  scene.add( light6 );
-
   // Add a box.
-  //createBox(500, 500, 500, 1000, -1000, -1000, 'brick');
-  //createBox(500, 500, 500, -200, -1000, -4000, 'brick', 0, Math.PI/4);
+  var plant = new VrObject( -15, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  plant.build();
 
-    var mesh = null;
-    var loader = new THREE.JSONLoader();
-    loader.load('./assets/models/desk/desk.json', function(geometry) {
+  var plant = new VrObject( 160, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  plant.build();
 
-      loader2 = new THREE.TextureLoader();
-      var inTexture = loader2.load( './assets/textures/wood/wood.jpg' );
-      inTexture.anisotropy = renderer.getMaxAnisotropy();
-      inTexture.wrapS = inTexture.wrapT = THREE.RepeatWrapping;
-      inTexture.repeat.set(1, 1);
+  var plant = new VrObject( -15, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  plant.build();
 
-      var bump = loader2.load( './assets/textures/wood/wood_bump.jpg' );
-      bump.anisotropy = renderer.getMaxAnisotropy();
-      bump.wrapS = bump.wrapT = THREE.ReapeatWrapping;
-      bump.repeat.set(4, 4);
+  var plant = new VrObject( 160, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  plant.build();
 
-      var displace = loader2.load( './assets/textures/wood/wood_disp.jpg' );
-      displace.anisotropy = renderer.getMaxAnisotropy();
-      displace.wrapS = displace.wrapT = THREE.ReapeatWrapping;
-      displace.repeat.set(4, 4);
+  var desk1 = new VrObject ( -4, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
+  desk1.build();
 
-      material = new THREE.MeshLambertMaterial({
-        color: '#ffffff',
-        shininess: '20',
-        specular: '#666666',
-        map: inTexture,
-        //displacementMap: displace,
-        //bumpMap: bump
-      });
+  var desk2 = new VrObject ( 120, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
+  desk2.build();
 
-      mesh = new THREE.Mesh(geometry, material);
-      mesh2 = new THREE.Mesh(geometry, material);
-      mesh3 = new THREE.Mesh(geometry, material);
-      mesh4 = new THREE.Mesh(geometry, material);
+  var desk3 = new VrObject ( 130, 1.5, -255, 0, 0, 0, 'wood', 'desk' );
+  desk3.build();
 
-      mesh.rotation.y = -Math.PI/2;
-      mesh.position.set( -4, 1.5, -18 );
-      scene.add(mesh);
+  var desk4 = new VrObject ( 60, 1.5, -265, 0, Math.PI/2, 0, 'wood', 'desk' );
+  desk4.build();
 
-      mesh2.rotation.y = -Math.PI/2;
-      mesh2.position.set( 120, 1.5, -18 );
-      scene.add(mesh2);
+  var keyboard = new VrObject (2, 24, -19, 0, Math.PI/2, 0, '#555555', 'keyboard', 'color' );
+  keyboard.build();
 
-      mesh3.rotation.y = -2 *Math.PI;
-      mesh3.position.set( 130, 1.5, -255 );
-      scene.add(mesh3);
+  var keyboard = new VrObject (120, 24, -19, 0, 5 * Math.PI/3, 0, '#555555', 'keyboard', 'color' );
+  keyboard.build();
 
-      mesh4.rotation.y = Math.PI/2;
-      mesh4.position.set( 60, 1.5, -265 );
-      scene.add(mesh4);
-    });
+  var keyboard = new VrObject (53, 24, -265, 0, -Math.PI/2, 0, '#dddddd', 'keyboard', 'color' );
+  keyboard.build();
+
+  var keyboard = new VrObject (128, 24, -265, 0, 0, 0, '#555555', 'keyboard', 'color' );
+  keyboard.build();
+
+  var computerScreen = new VrObject (2, 24, -27, 0, -Math.PI/2, 0, '#555555', 'computerScreen', 'color' );
+  computerScreen.build();
+
+  var computerScreen = new VrObject (120, 24, -30, 0, 5 * Math.PI/3, 0, '#555555', 'computerScreen', 'color' );
+  computerScreen.build();
+
+  var computerScreen = new VrObject (53, 24, -255, 0, Math.PI/2, 0, '#dddddd', 'computerScreen', 'color' );
+  computerScreen.build();
+
+  var computerScreen = new VrObject (118, 24, -265, 0, 0, 0, '#555555', 'computerScreen', 'color' );
+  computerScreen.build();
 
   // Create a level.
   var level = new Level(1);
@@ -199,8 +168,8 @@ function init() {
 
   // align top-left
   stats.domElement.style.position = 'absolute';
-  stats.domElement.style.left = '0px';
-  stats.domElement.style.top = '0px';
+  stats.domElement.style.left = '0';
+  stats.domElement.style.top = '0';
 
   document.body.appendChild( stats.domElement );
 
@@ -223,7 +192,6 @@ function onWindowResize() {
 function update() {
   camera.updateProjectionMatrix();
   controls.update();
-  rotationPoint.rotation.y += 0.01;
 }
 
 /**

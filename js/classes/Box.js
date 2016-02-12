@@ -34,7 +34,7 @@ Box.prototype.build = function(scene) {
     var materialJSON;
     var texture = this.texture;
 
-    loadJSON(MATERIAL_PATH + this.texture + ".json", this, function(wall, response) {
+    loadJSON(TEXTURE_PATH + this.texture + ".json", this, function(wall, response) {
       var material;
       materialJSON = JSON.parse(response);
 
