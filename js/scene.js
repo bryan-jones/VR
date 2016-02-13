@@ -88,9 +88,9 @@ function init() {
 
   // Build the controls.
   controls = new THREE.OrbitControls( camera, element );
-  controls.enablePan = false;
-  controls.enableZoom = false;
-  controls.target.copy( new THREE.Vector3( 70, 50, -140));
+  //controls.enablePan = false;
+  //controls.enableZoom = false;
+  //controls.target.copy( new THREE.Vector3( 70, 50, -140));
 
   function setOrientationControls(e) {
     if (!e.alpha) {
@@ -103,8 +103,6 @@ function init() {
     window.removeEventListener('deviceorientation', setOrientationControls, true);
   }
   window.addEventListener('deviceorientation', setOrientationControls, true);
-
-  document.addEventListener( 'mousedown', magnetDetected, false );
 
   // Lights
   var light = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
@@ -162,6 +160,21 @@ function init() {
   var computerScreen = new VrObject (118, 24, -265, 0, 0, 0, '#555555', 'computerScreen', 'color' );
   computerScreen.build();
 
+  var paper = new VrObject (20, 24.3, -19, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  var paper = new VrObject (50, 0.2, -27, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  var paper = new VrObject (50, 0.2, -24, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  var paper = new VrObject (145, 24.3, -28, 0, Math.PI/6, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  var paperStack = new VrObject (145, 24.3, -28, 0, Math.PI/2, 0, '#dddddd', 'paperStack', 'color' );
+  paperStack.build();
+
   // Create a level.
   var level = new Level(1);
   level.build();
@@ -213,12 +226,4 @@ function animate() {
   update();
   render();
   stats.end();
-}
-
-function magnetDetected(e) {
-  // Get the current camera position and add 20 to the z axis.
-  if (camera.position.z < 0 ) {
-    controls.target.copy( new THREE.Vector3( 70, 50, camera.position.z + 20));
-    camera.position.z += 20;
-  }
 }
