@@ -14,6 +14,7 @@
 const TEXTURE_PATH = './assets/textures/';
 const LEVEL_PATH = './assets/levels/';
 const MODEL_PATH = './assets/models/';
+
 /**
  * Create the animation request.
  */
@@ -102,6 +103,8 @@ function init() {
     window.removeEventListener('deviceorientation', setOrientationControls, true);
   }
   window.addEventListener('deviceorientation', setOrientationControls, true);
+
+  document.addEventListener( 'mousedown', magnetDetected, false );
 
   // Lights
   var light = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
@@ -212,18 +215,7 @@ function animate() {
   stats.end();
 }
 
-function createWall(position, inTexture, inMoveZ, inMoveX) {
-  inMoveZ = typeof inMoveZ !== 'undefined' ? inMoveZ : 0;
-  inMoveX = typeof inMoveX !== 'undefined' ? inMoveX : 0;
-  var object = new Wall(position, inTexture, inMoveZ, inMoveX);
-  object.build(scene);
-}
-
-function createBox( length, width, height, posX, posY, posZ, inTexture, rotateX, rotateY, rotateZ ) {
-  rotateX = typeof rotateX !== 'undefined' ? rotateX : 0;
-  rotateY = typeof rotateY !== 'undefined' ? rotateY : 0;
-  rotateZ = typeof rotateZ !== 'undefined' ? rotateZ : 0;
-
-  var object = new Box( length, width, height, posX, posY, posZ, inTexture, rotateX, rotateY, rotateZ );
-  object.build(scene);
+function magnetDetected(e) {
+  // Get the current camera position and add 20 to the z axis.
+  controls.target.copy( new THREE.Vector3( 70, 50, camera.position.z - 20));
 }

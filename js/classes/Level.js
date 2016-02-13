@@ -21,27 +21,34 @@ Level.prototype.build = function(scene) {
     var levelJSON = JSON.parse(response);
 
     var i = 0;
+    var object;
     while ( levelJSON[i] ) {
       var j = 0;
       while ( levelJSON[i][j] ) {
         // Build the walls.
         if ( levelJSON[i][j].walls.front !== null ) {
-          createWall('front', levelJSON[i][j].walls.front, j, i);
+          object = new Wall('front', levelJSON[i][j].walls.front, j, i);
+          object.build(scene);
         }
         if ( levelJSON[i][j].walls.back !== null ) {
-          createWall('back', levelJSON[i][j].walls.back, j, i);
+          object = new Wall('back', levelJSON[i][j].walls.back, j, i);
+          object.build(scene);
         }
         if ( levelJSON[i][j].walls.top !== null ) {
-          createWall('top', levelJSON[i][j].walls.top, j, i);
+          object = new Wall('top', levelJSON[i][j].walls.top, j, i);
+          object.build(scene);
         }
         if ( levelJSON[i][j].walls.bottom !== null ) {
-          createWall('bottom', levelJSON[i][j].walls.bottom, j, i);
+          object = new Wall('bottom', levelJSON[i][j].walls.bottom, j, i);
+          object.build(scene);
         }
         if ( levelJSON[i][j].walls.left !== null ) {
-          createWall('left', levelJSON[i][j].walls.left, j, i);
+          object = new Wall('left', levelJSON[i][j].walls.left, j, i);
+          object.build(scene);
         }
         if ( levelJSON[i][j].walls.right !== null ) {
-          createWall('right', levelJSON[i][j].walls.right, j, i);
+          object = new Wall('right', levelJSON[i][j].walls.right, j, i);
+          object.build(scene);
         }
         j++
       }
