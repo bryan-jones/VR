@@ -217,5 +217,8 @@ function animate() {
 
 function magnetDetected(e) {
   // Get the current camera position and add 20 to the z axis.
-  controls.target.copy( new THREE.Vector3( 70, 50, camera.position.z - 20));
+  if (camera.position.z < 0 ) {
+    controls.target.copy( new THREE.Vector3( 70, 50, camera.position.z + 20));
+    camera.position.z += 20;
+  }
 }
