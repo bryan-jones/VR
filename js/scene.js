@@ -68,7 +68,7 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  camera.position.set( 0, 35, 0 );
+  camera.position.set( 0, 50, 0 );
   camera.translateZ( 1 );
   camera.position.x = 70;
   camera.position.z = -140;
@@ -88,9 +88,9 @@ function init() {
 
   // Build the controls.
   controls = new THREE.OrbitControls( camera, element );
-  controls.enablePan = false;
-  controls.enableZoom = false;
-  controls.target.copy( new THREE.Vector3( 70, 50, -140));
+  //controls.enablePan = false;
+  //controls.enableZoom = false;
+  //controls.target.copy( new THREE.Vector3( 70, 50, -140 ));
 
   function setOrientationControls(e) {
     if (!e.alpha) {
