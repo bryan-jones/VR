@@ -55,7 +55,7 @@
     "0": {
       "walls": {
         "front": null,
-        "back": "blueDryWall",
+        "back": null,
         "left": null,
         "right": null,
         "top": "ceiling",
@@ -119,7 +119,7 @@
         "front": null,
         "back": null,
         "left": null,
-        "right": "blueDryWall",
+        "right": null,
         "top": "ceiling",
         "bottom": "carpet"
       }
@@ -129,7 +129,7 @@
         "front": null,
         "back": null,
         "left": null,
-        "right": "blueDryWall",
+        "right": null,
         "top": "ceiling",
         "bottom": "carpet"
       }
@@ -139,7 +139,7 @@
         "front": null,
         "back": null,
         "left": null,
-        "right": "blueDryWall",
+        "right": null,
         "top": "ceiling",
         "bottom": "carpet"
       }

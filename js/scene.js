@@ -197,6 +197,61 @@ function init() {
   lights = new VrObject( 122.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
   lights.build();
 
+
+  // Create window wall surroundings.
+
+  var geometry = new THREE.PlaneGeometry( 70, 13 );
+  loader = new THREE.TextureLoader();
+  var inBottom = loader.load( './assets/images/blueDryWallBottom.jpg' );
+  inBottom.anisotropy = renderer.getMaxAnisotropy();
+  var bottomMaterial = new THREE.MeshLambertMaterial({
+    color: 0xffffff,
+    map: inBottom,
+  });
+  var mesh = new THREE.Mesh( geometry, bottomMaterial );
+  mesh.position.set( 70, 6, 35 );
+  mesh.rotateY(Math.PI);
+  scene.add( mesh );
+
+  var inTop = loader.load( './assets/images/blueDryWallTop.jpg' );
+  inTop.anisotropy = renderer.getMaxAnisotropy();
+  var material = new THREE.MeshLambertMaterial({
+    color: 0xffffff,
+    map: inTop,
+  });
+  var mesh = new THREE.Mesh( geometry, material );
+  mesh.position.set( 70, 63.5, 35 );
+  mesh.rotateY(Math.PI);
+  scene.add( mesh );
+
+  // Right Wall Bottom
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 6, -70 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 6, -140 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 6, -210 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+
+  // Right Wall Top
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 63.5, -70 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 63.5, -140 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+  mesh = new THREE.Mesh ( geometry, bottomMaterial );
+  mesh.position.set( 175, 63.5, -210 );
+  mesh.rotateY(-Math.PI/2);
+  scene.add( mesh );
+
   /*var spotlight1 = new THREE.SpotLight( 0x00ff00, 1, 0 );
   spotlight1.position.set( 15, 69, -40 );
   spotlight1.rotateX = Math.PI/4;
@@ -226,6 +281,9 @@ function init() {
 
   // Show FPS
   stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
+
+  // Add a cubemap.
+  Cubemap();
 
   // align top-left
   stats.domElement.style.position = 'absolute';
