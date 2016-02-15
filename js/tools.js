@@ -54,16 +54,21 @@ function buildObject( texture, object, geometry, type ) {
         color: materialJSON.color,
         //shininess: parseInt(materialJSON.shininess),
         //specular: materialJSON.specular,
-        map: inTexture
+        map: inTexture,
         //displacementMap: displace,
         //bumpMap: bump,
         //bumpScale: typeof materialJSON.bumpScale !== 'undefined' ? materialJSON.bumpScale : 0.10,
         //shading: typeof materialJSON.shading !== 'undefined' ? materialJSON.shading : THREE.SmoothShading
+        emissive: typeof materialJSON.emissive !== 'undefined' ? materialJSON.emissive : '#000000'
       });
 
       var mesh = new THREE.Mesh( geometry, material );
       mesh.position.set( object.posX, object.posY, object.posZ );
       mesh.rotation.set( object.rotX, object.rotY, object.rotZ );
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
       scene.add(mesh);
     });
   }

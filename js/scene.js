@@ -68,7 +68,7 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  camera.position.set( 0, 50, 0 );
+  //camera.position.set( 0, 50, 0 );
   camera.translateZ( 1 );
   camera.position.x = 70;
   camera.position.z = -140;
@@ -79,6 +79,7 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
   renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.shadowMap.enabled;
   container.appendChild(element);
 
   // Add the VR screen effect.
@@ -88,8 +89,8 @@ function init() {
 
   // Build the controls.
   controls = new THREE.OrbitControls( camera, element );
-  //controls.enablePan = false;
-  //controls.enableZoom = false;
+  // controls.enablePan = false;
+  // controls.enableZoom = false;
   //controls.target.copy( new THREE.Vector3( 70, 50, -140 ));
 
   function setOrientationControls(e) {
@@ -105,7 +106,7 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
   // Lights
-  var light = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
+  var light = new THREE.HemisphereLight(0xaaaaaa, 0x333333, 1);
   scene.add(light);
 
   var ambient = new THREE.AmbientLight( 0x888888 ); // soft white light
@@ -163,17 +164,61 @@ function init() {
   var paper = new VrObject (20, 24.3, -19, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  var paper = new VrObject (50, 0.2, -27, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (50, 0.2, -27, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  var paper = new VrObject (50, 0.2, -24, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (50, 0.2, -24, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  var paper = new VrObject (145, 24.3, -28, 0, Math.PI/6, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (145, 24.3, -28, 0, Math.PI/6, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
   var paperStack = new VrObject (145, 24.3, -28, 0, Math.PI/2, 0, '#dddddd', 'paperStack', 'color' );
   paperStack.build();
+
+  paper = new VrObject (124, 24.3, -250, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  paper = new VrObject (118, 24.3, -240, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper.build();
+
+  var trashCan = new VrObject( 60, 0, 25, 0, 0, 0, '#666666', 'trashCan', 'color' );
+  trashCan.build();
+
+  var lights = new VrObject( 17.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights.build();
+
+  lights = new VrObject( 122.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights.build();
+
+  lights = new VrObject( 17.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights.build();
+
+  lights = new VrObject( 122.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights.build();
+
+  /*var spotlight1 = new THREE.SpotLight( 0x00ff00, 1, 0 );
+  spotlight1.position.set( 15, 69, -40 );
+  spotlight1.rotateX = Math.PI/4;
+  spotlight1.castShadow = true;
+  scene.add( spotlight1 );
+  var lightTarget1 = new THREE.Object3D();
+  scene.add( lightTarget1 );
+  lightTarget1.position.set( spotlight1.position.x, 0, spotlight1.position.z );
+  spotlight1.target = lightTarget1;*/
+
+  var light = new THREE.PointLight( 0xffffff, 3, 100 );
+  light.position.set( 15, 69, -40 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffff, 3, 100 );
+  light.position.set( 120, 69, -40 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffff, 3, 100 );
+  light.position.set( 0, 69, -260 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffff, 3, 100 );
+  light.position.set( 120, 69, -240 );
+  scene.add( light );
 
   // Create a level.
   var level = new Level(1);

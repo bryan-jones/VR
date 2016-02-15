@@ -1,0 +1,10 @@
+{
+  "name": "lights",
+  "image": "./assets/textures/lights/lights.jpg",
+  "sizeX": "1",
+  "sizeY": "2",
+  "shininess": "0",
+  "specular": "#333333",
+  "color": "#ffffff",
+  "emissive": "#ffffff"
+}
