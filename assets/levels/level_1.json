@@ -24,7 +24,7 @@
       "walls": {
         "front": null,
         "back": "whiteDryWall",
-        "left": "whiteDryWall",
+        "left": "monarch",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"
