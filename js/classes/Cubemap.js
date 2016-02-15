@@ -34,7 +34,7 @@ var Cubemap = function() {
 
   // create skybox mesh
   var skybox = new THREE.Mesh(
-    new THREE.CubeGeometry(1000, 1000, 1000),
+    new THREE.CubeGeometry(2000, 1000, 1000),
     skyBoxMaterial
   );
 

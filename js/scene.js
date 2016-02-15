@@ -68,9 +68,8 @@ function init() {
     1, // Near view.
     10000 // Far view.
   );
-  //camera.position.set( 0, 50, 0 );
   camera.translateZ( 1 );
-  camera.position.x = 70;
+  camera.position.x = 490;
   camera.position.z = -140;
   camera.position.y = 50;
   scene.add( camera );
@@ -113,88 +112,88 @@ function init() {
   scene.add( ambient );
 
   // Add a box.
-  var plant = new VrObject( -15, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  var plant = new VrObject( 405, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
   plant.build();
 
-  var plant = new VrObject( 160, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  var plant = new VrObject( 580, 0, -60, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
   plant.build();
 
-  var plant = new VrObject( -15, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  var plant = new VrObject( 405, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
   plant.build();
 
-  var plant = new VrObject( 160, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
+  var plant = new VrObject( 480, 0, -290, 0, 0, 0, '#55bb55', 'tallPlant', 'color' );
   plant.build();
 
-  var desk1 = new VrObject ( -4, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
+  var desk1 = new VrObject ( 416, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
   desk1.build();
 
-  var desk2 = new VrObject ( 120, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
+  var desk2 = new VrObject ( 540, 1.5, -18, 0, -Math.PI/2, 0, 'wood', 'desk' );
   desk2.build();
 
-  var desk3 = new VrObject ( 130, 1.5, -255, 0, 0, 0, 'wood', 'desk' );
+  var desk3 = new VrObject ( 550, 1.5, -255, 0, 0, 0, 'wood', 'desk' );
   desk3.build();
 
-  var desk4 = new VrObject ( 60, 1.5, -265, 0, Math.PI/2, 0, 'wood', 'desk' );
+  var desk4 = new VrObject ( 480, 1.5, -265, 0, Math.PI/2, 0, 'wood', 'desk' );
   desk4.build();
 
-  var keyboard = new VrObject (2, 24, -19, 0, Math.PI/2, 0, '#555555', 'keyboard', 'color' );
+  var keyboard = new VrObject (422, 24, -19, 0, Math.PI/2, 0, '#555555', 'keyboard', 'color' );
   keyboard.build();
 
-  var keyboard = new VrObject (120, 24, -19, 0, 5 * Math.PI/3, 0, '#555555', 'keyboard', 'color' );
+  var keyboard = new VrObject (540, 24, -19, 0, 5 * Math.PI/3, 0, '#555555', 'keyboard', 'color' );
   keyboard.build();
 
-  var keyboard = new VrObject (53, 24, -265, 0, -Math.PI/2, 0, '#dddddd', 'keyboard', 'color' );
+  var keyboard = new VrObject (473, 24, -265, 0, -Math.PI/2, 0, '#dddddd', 'keyboard', 'color' );
   keyboard.build();
 
-  var keyboard = new VrObject (128, 24, -265, 0, 0, 0, '#555555', 'keyboard', 'color' );
+  var keyboard = new VrObject (548, 24, -265, 0, 0, 0, '#555555', 'keyboard', 'color' );
   keyboard.build();
 
-  var computerScreen = new VrObject (2, 24, -27, 0, -Math.PI/2, 0, '#555555', 'computerScreen', 'color' );
+  var computerScreen = new VrObject (422, 24, -27, 0, -Math.PI/2, 0, '#555555', 'computerScreen', 'color' );
   computerScreen.build();
 
-  var computerScreen = new VrObject (120, 24, -30, 0, 5 * Math.PI/3, 0, '#555555', 'computerScreen', 'color' );
+  var computerScreen = new VrObject (540, 24, -30, 0, 5 * Math.PI/3, 0, '#555555', 'computerScreen', 'color' );
   computerScreen.build();
 
-  var computerScreen = new VrObject (53, 24, -255, 0, Math.PI/2, 0, '#dddddd', 'computerScreen', 'color' );
+  var computerScreen = new VrObject (473, 24, -255, 0, Math.PI/2, 0, '#dddddd', 'computerScreen', 'color' );
   computerScreen.build();
 
-  var computerScreen = new VrObject (118, 24, -265, 0, 0, 0, '#555555', 'computerScreen', 'color' );
+  var computerScreen = new VrObject (538, 24, -265, 0, 0, 0, '#555555', 'computerScreen', 'color' );
   computerScreen.build();
 
-  var paper = new VrObject (20, 24.3, -19, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  var paper = new VrObject (440, 24.3, -19, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  paper = new VrObject (50, 0.2, -27, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (470, 0.2, -27, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  paper = new VrObject (50, 0.2, -24, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (470, 0.2, -24, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  paper = new VrObject (145, 24.3, -28, 0, Math.PI/6, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (565, 24.3, -28, 0, Math.PI/6, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  var paperStack = new VrObject (145, 24.3, -28, 0, Math.PI/2, 0, '#dddddd', 'paperStack', 'color' );
+  var paperStack = new VrObject (565, 24.3, -28, 0, Math.PI/2, 0, '#dddddd', 'paperStack', 'color' );
   paperStack.build();
 
-  paper = new VrObject (124, 24.3, -250, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (544, 24.3, -250, 0, Math.PI/2, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  paper = new VrObject (118, 24.3, -240, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
+  paper = new VrObject (538, 24.3, -240, 0, Math.PI/4, 0, '#dddddd', 'paper', 'color' );
   paper.build();
 
-  var trashCan = new VrObject( 60, 0, 25, 0, 0, 0, '#666666', 'trashCan', 'color' );
+  var trashCan = new VrObject( 480, 0, 25, 0, 0, 0, '#666666', 'trashCan', 'color' );
   trashCan.build();
 
-  var lights = new VrObject( 17.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  var lights = new VrObject( 437.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
   lights.build();
 
-  lights = new VrObject( 122.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights = new VrObject( 542.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
   lights.build();
 
-  lights = new VrObject( 17.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights = new VrObject( 437.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
   lights.build();
 
-  lights = new VrObject( 122.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  lights = new VrObject( 542.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
   lights.build();
 
 
@@ -209,7 +208,7 @@ function init() {
     map: inBottom,
   });
   var mesh = new THREE.Mesh( geometry, bottomMaterial );
-  mesh.position.set( 70, 6, 35 );
+  mesh.position.set( 490, 6, 35 );
   mesh.rotateY(Math.PI);
   scene.add( mesh );
 
@@ -220,35 +219,35 @@ function init() {
     map: inTop,
   });
   var mesh = new THREE.Mesh( geometry, material );
-  mesh.position.set( 70, 63.5, 35 );
+  mesh.position.set( 490, 63.5, 35 );
   mesh.rotateY(Math.PI);
   scene.add( mesh );
 
   // Right Wall Bottom
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 6, -70 );
+  mesh.position.set( 595, 6, -70 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 6, -140 );
+  mesh.position.set( 595, 6, -140 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 6, -210 );
+  mesh.position.set( 595, 6, -210 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
 
   // Right Wall Top
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 63.5, -70 );
+  mesh.position.set( 595, 63.5, -70 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 63.5, -140 );
+  mesh.position.set( 595, 63.5, -140 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
   mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 175, 63.5, -210 );
+  mesh.position.set( 595, 63.5, -210 );
   mesh.rotateY(-Math.PI/2);
   scene.add( mesh );
 
@@ -262,18 +261,34 @@ function init() {
   lightTarget1.position.set( spotlight1.position.x, 0, spotlight1.position.z );
   spotlight1.target = lightTarget1;*/
 
+  // Room Lights.
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
-  light.position.set( 15, 69, -40 );
+  light.position.set( 435, 69, -40 );
   scene.add( light );
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
-  light.position.set( 120, 69, -40 );
+  light.position.set( 540, 69, -40 );
   scene.add( light );
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
-  light.position.set( 0, 69, -260 );
+  light.position.set( 420, 69, -260 );
   scene.add( light );
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
-  light.position.set( 120, 69, -240 );
+  light.position.set( 540, 69, -240 );
   scene.add( light );
+
+  // Hall Lights.
+  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
+  light.position.set( 305, 69, -105 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
+  light.position.set( 210, 69, -210 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
+  light.position.set( 105, 69, -105 );
+  scene.add( light );
+  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
+  light.position.set( 55, 69, -210 );
+  scene.add( light );
+
 
   // Create a level.
   var level = new Level(1);
