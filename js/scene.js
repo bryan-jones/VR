@@ -254,6 +254,25 @@ function init() {
   hallLight3.position.set( 55, 69, -210 );
   scene.add( hallLight3 );
 
+  // Create glass.
+  var urlPrefix = "./assets/images/";
+  var urls = [
+    urlPrefix + 'right.jpg', // right
+    urlPrefix + 'left.jpg', // left
+    urlPrefix + 'top.jpg', // top
+    urlPrefix + 'bottom.jpg', // bottom
+    urlPrefix + 'front.jpg', // front
+    urlPrefix + 'back.jpg', // back
+  ];
+  var reflectionCube = new THREE.CubeTextureLoader().load( urls );
+      reflectionCube.format = THREE.RGBFormat;
+  var geometry = new THREE.PlaneGeometry(70, 44);
+  var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube, combine: THREE.MixOperation, reflectivity: 0.95 } );
+  var mesh = new THREE.Mesh( geometry, cubeMaterial3 );
+  mesh.position.set( 490, 35, 35 );
+  mesh.rotation.set ( 0, Math.PI, 0 );
+  scene.add(mesh);
+
   // Create a level.
   var level = new Level(1);
   level.build();
