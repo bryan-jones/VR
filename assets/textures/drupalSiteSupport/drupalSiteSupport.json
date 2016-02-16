@@ -1,0 +1,9 @@
+{
+  "name": "drupalSiteSupport",
+  "image": "./assets/textures/drupalSiteSupport/drupalSiteSupport.jpg",
+  "sizeX": "1",
+  "sizeY": "1",
+  "shininess": "5",
+  "specular": "#222222",
+  "color": "#ffffff"
+}

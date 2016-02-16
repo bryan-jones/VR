@@ -326,7 +326,7 @@
       "walls": {
         "front": null,
         "back": null,
-        "left": "whiteDryWall",
+        "left": "drupalSiteSupport",
         "right": null,
         "top": "ceiling",
         "bottom": "carpet"

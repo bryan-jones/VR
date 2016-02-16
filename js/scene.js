@@ -184,82 +184,50 @@ function init() {
   var trashCan = new VrObject( 480, 0, 25, 0, 0, 0, '#666666', 'trashCan', 'color' );
   trashCan.build();
 
-  var lights = new VrObject( 437.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
-  lights.build();
+  var lightSwitch = new VrObject( 386, 32, -185, 0, 0, 0, '#eeeeee', 'lightSwitch', 'color' );
+  lightSwitch.build();
 
-  lights = new VrObject( 542.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
-  lights.build();
+  var backLeftLights = new VrObject( 437.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  backLeftLights.build();
 
-  lights = new VrObject( 437.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
-  lights.build();
+  backRightLights = new VrObject( 542.5, 69, -35, 0, Math.PI/2, 0, 'lights', 'lights' );
+  backRightLights.build();
 
-  lights = new VrObject( 542.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
-  lights.build();
+  frontLeftLights = new VrObject( 437.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  frontLeftLights.build();
 
+  frontRightLights = new VrObject( 542.5, 69, -245, 0, Math.PI/2, 0, 'lights', 'lights' );
+  frontRightLights.build();
 
   // Create window wall surroundings.
 
-  var geometry = new THREE.PlaneGeometry( 70, 13 );
-  loader = new THREE.TextureLoader();
-  var inBottom = loader.load( './assets/images/blueDryWallBottom.jpg' );
-  inBottom.anisotropy = renderer.getMaxAnisotropy();
-  var bottomMaterial = new THREE.MeshLambertMaterial({
-    color: 0xffffff,
-    map: inBottom,
-  });
-  var mesh = new THREE.Mesh( geometry, bottomMaterial );
-  mesh.position.set( 490, 6, 35 );
-  mesh.rotateY(Math.PI);
-  scene.add( mesh );
+  // Back bottom wall.
+  object = new VrBasicObject( 490, 6, 35, 0, Math.PI, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
 
-  var inTop = loader.load( './assets/images/blueDryWallTop.jpg' );
-  inTop.anisotropy = renderer.getMaxAnisotropy();
-  var material = new THREE.MeshLambertMaterial({
-    color: 0xffffff,
-    map: inTop,
-  });
-  var mesh = new THREE.Mesh( geometry, material );
-  mesh.position.set( 490, 63.5, 35 );
-  mesh.rotateY(Math.PI);
-  scene.add( mesh );
+  // Back top wall.
+  object = new VrBasicObject( 490, 63.5, 35, 0, Math.PI, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
 
-  // Right Wall Bottom
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 6, -70 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 6, -140 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 6, -210 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
+  // Right bottom walls.
+  object = new VrBasicObject( 595, 6, -70, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
+  object = new VrBasicObject( 595, 6, -140, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
+  object = new VrBasicObject( 595, 6, -210, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
 
-  // Right Wall Top
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 63.5, -70 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 63.5, -140 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
-  mesh = new THREE.Mesh ( geometry, bottomMaterial );
-  mesh.position.set( 595, 63.5, -210 );
-  mesh.rotateY(-Math.PI/2);
-  scene.add( mesh );
+  // Right top walls.
+  object = new VrBasicObject( 595, 63.5, -70, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
+  object = new VrBasicObject( 595, 63.5, -140, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
+  object = new VrBasicObject( 595, 63.5, -210, 0, -Math.PI/2, 0, 'plane', "blueDryWall", 70, 13 );
+  object.build();
 
-  /*var spotlight1 = new THREE.SpotLight( 0x00ff00, 1, 0 );
-  spotlight1.position.set( 15, 69, -40 );
-  spotlight1.rotateX = Math.PI/4;
-  spotlight1.castShadow = true;
-  scene.add( spotlight1 );
-  var lightTarget1 = new THREE.Object3D();
-  scene.add( lightTarget1 );
-  lightTarget1.position.set( spotlight1.position.x, 0, spotlight1.position.z );
-  spotlight1.target = lightTarget1;*/
+  // Monarch hall wall.
+  object = new VrBasicObject( 381.5, 35, -175, 0, 0, 0, 'plane', 'whiteDryWall', 7.5, 70 )
+  object.build();
 
   // Room Lights.
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
@@ -276,19 +244,15 @@ function init() {
   scene.add( light );
 
   // Hall Lights.
-  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
-  light.position.set( 305, 69, -105 );
-  scene.add( light );
-  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
-  light.position.set( 210, 69, -210 );
-  scene.add( light );
-  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
-  light.position.set( 105, 69, -105 );
-  scene.add( light );
-  var light = new THREE.PointLight( 0xffffcc, 3, 100 );
-  light.position.set( 55, 69, -210 );
-  scene.add( light );
-
+  var hallLight1 = new THREE.PointLight( 0xffffcc, 3, 100 );
+  hallLight1.position.set( 305, 69, -105 );
+  scene.add( hallLight1 );
+  var hallLight2 = new THREE.PointLight( 0xffffcc, 3, 100 );
+  hallLight2.position.set( 190, 69, -210 );
+  scene.add( hallLight2 );
+  var hallLight3 = new THREE.PointLight( 0xffffcc, 3, 100 );
+  hallLight3.position.set( 55, 69, -210 );
+  scene.add( hallLight3 );
 
   // Create a level.
   var level = new Level(1);
