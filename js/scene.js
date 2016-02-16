@@ -61,6 +61,10 @@ function init() {
   scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2( 0x000000, 0.00015 );
 
+  rotationPoint = new THREE.Object3D();
+  rotationPoint.position.set(490, 50, -150);
+  scene.add( rotationPoint );
+
   // Create the camera.
   camera = new THREE.PerspectiveCamera(
    60, // Angle
@@ -69,10 +73,11 @@ function init() {
     10000 // Far view.
   );
   camera.translateZ( 1 );
-  camera.position.x = 490;
-  camera.position.z = -140;
-  camera.position.y = 50;
-  scene.add( camera );
+  //camera.position.x = 490;
+  //camera.position.z = -140;
+  //camera.position.y = 50;
+  rotationPoint.add(camera);
+  //scene.add( camera );
 
   // Build the renderer.
   renderer = new THREE.WebGLRenderer();
