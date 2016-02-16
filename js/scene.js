@@ -204,6 +204,14 @@ function init() {
   // Back bottom wall.
   object = new VrBasicObject( 490, 6, 35, 0, Math.PI, 0, 'plane', "blueDryWall", 70, 13 );
   object.build();
+  panel = new VrBasicObject( 455, 34.5, 35, 0, 0, 0, 'box', "wood", 4, 45, 2 );
+  panel.build();
+  panel = new VrBasicObject( 525, 34.5, 35, 0, 0, 0, 'box', "wood", 4, 45, 2 );
+  panel.build();
+  panel = new VrBasicObject( 490, 55, 35, 0, 0, 0, 'box', "wood", 68, 4, 2 );
+  panel.build();
+  panel = new VrBasicObject( 490, 14, 35, 0, 0, 0, 'box', "wood", 68, 4, 2 );
+  panel.build();
 
   // Back top wall.
   object = new VrBasicObject( 490, 63.5, 35, 0, Math.PI, 0, 'plane', "blueDryWall", 70, 13 );
@@ -229,6 +237,15 @@ function init() {
   object = new VrBasicObject( 381.5, 35, -175, 0, 0, 0, 'plane', 'whiteDryWall', 7.5, 70 )
   object.build();
 
+  panel = new VrBasicObject( 595, 34.5, -35, 0, Math.PI/2, 0, 'box', "wood", 4, 45, 2 );
+  panel.build();
+  panel = new VrBasicObject( 595, 34.5, -246, 0, Math.PI/2, 0, 'box', "wood", 4, 45, 2 );
+  panel.build();
+  panel = new VrBasicObject( 595, 55, -140, 0, Math.PI/2, 0, 'box', "wood", 208, 4, 2 );
+  panel.build();
+  panel = new VrBasicObject( 595, 14, -140, 0, Math.PI/2, 0, 'box', "wood", 208, 4, 2 );
+  panel.build();
+
   // Room Lights.
   var light = new THREE.PointLight( 0xffffff, 3, 100 );
   light.position.set( 435, 69, -40 );
@@ -253,25 +270,6 @@ function init() {
   var hallLight3 = new THREE.PointLight( 0xffffcc, 3, 100 );
   hallLight3.position.set( 55, 69, -210 );
   scene.add( hallLight3 );
-
-  // Create glass.
-  var urlPrefix = "./assets/images/";
-  var urls = [
-    urlPrefix + 'right.jpg', // right
-    urlPrefix + 'left.jpg', // left
-    urlPrefix + 'top.jpg', // top
-    urlPrefix + 'bottom.jpg', // bottom
-    urlPrefix + 'front.jpg', // front
-    urlPrefix + 'back.jpg', // back
-  ];
-  var reflectionCube = new THREE.CubeTextureLoader().load( urls );
-      reflectionCube.format = THREE.RGBFormat;
-  var geometry = new THREE.PlaneGeometry(70, 44);
-  var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube, combine: THREE.MixOperation, reflectivity: 0.95 } );
-  var mesh = new THREE.Mesh( geometry, cubeMaterial3 );
-  mesh.position.set( 490, 35, 35 );
-  mesh.rotation.set ( 0, Math.PI, 0 );
-  scene.add(mesh);
 
   // Create a level.
   var level = new Level(1);

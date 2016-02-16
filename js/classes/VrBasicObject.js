@@ -7,7 +7,7 @@
  * Define the vrObject class.
  */
 var VrBasicObject = function( posX, posY, posZ, rotX, rotY, rotZ, geometry, texture, sizeX, sizeY, sizeZ ) {
-  this.sizeZ = typeof model !== 'undefined' ? model : 0;
+  this.sizeZ = typeof sizeZ !== 'undefined' ? sizeZ : 0;
   this.posX = posX;
   this.posY = posY;
   this.posZ = posZ;
@@ -27,7 +27,7 @@ VrBasicObject.prototype.build = function() {
   if (this.geometry == 'plane') {
     geometry = new THREE.PlaneGeometry( this.sizeX, this.sizeY );
   }
-  else if (this.geometry == 'cube') {
+  else if (this.geometry == 'box') {
     geometry = new THREE.BoxGeometry( this.sizeX, this.sizeY, this.sizeZ );
   }
   else if (this.geometry == 'sphere') {
